@@ -46,13 +46,17 @@ void Pacman::OnProcessInput(const uint8_t* state)
 {
     Vector2 velocity = mRigidBodyComponent->GetVelocity();
 
-    if (state[SDL_SCANCODE_D])
-    {
-        mRigidBodyComponent->SetVelocity(Vector2(mForwardSpeed, velocity.y));
+    if(state[SDL_SCANCODE_D]){
+        mRigidBodyComponent->ApplyForce(Vector2(mForwardSpeed,0));
+        mRotation = 0;
+
+
+
     }
-    else if (state[SDL_SCANCODE_A])
-    {
-        mRigidBodyComponent->SetVelocity(Vector2(-mForwardSpeed, velocity.y));
+    else if(state[SDL_SCANCODE_A]) {
+        mRigidBodyComponent->ApplyForce(Vector2(-mForwardSpeed, 0));
+        mRotation = Math::Pi;
+
     }
 
     if (state[SDL_SCANCODE_W])
